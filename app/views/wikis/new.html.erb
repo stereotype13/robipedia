@@ -1,0 +1,15 @@
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<%= form_for [@user, @wiki] do |f| %>
+		  <div class="form-group">
+			  <%= f.label :title %>:
+			  <%= f.text_field :title, class: "form-control" %><br />
+
+			  <%= f.label :body %>:
+			  <%= f.text_area :body, class: "form-control" %><br />
+
+			  <%= f.submit "Save", class: "btn btn-default" %>
+		  </div>
+		<% end %>
+	</div>
+</div>

@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= stylesheet_link_tag    "vendor", :media => "all", :debug => false %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "vendor", :debug => false %>
   <%= csrf_meta_tags %>
 </head>
 <body style="padding-top: 60px;">
@@ -25,7 +26,10 @@
       <ul class="nav navbar-nav">
         <% if current_user %>
           <li>
-            <%= link_to "Wikis", user_wikis_path(current_user) %>
+            <%= link_to "My Wikis", user_wikis_path(current_user) %>
+		  </li> 
+		  <li>
+			<%= link_to "New Wiki", new_user_wiki_path(current_user) %>
           </li> 
         <% end %>
       </ul>
