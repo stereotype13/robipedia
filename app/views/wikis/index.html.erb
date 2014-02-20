@@ -1,0 +1,14 @@
+<table class="datatable">
+  <thead>
+    <tr>
+      <td>ID</td><td>Title</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @wiki.user.id %></td><td><%= @wiki.title %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= javascript_include_tag "wikis" %>
