@@ -6,7 +6,11 @@ Robipedia::Application.routes.draw do
   root to: "welcome#index"
 
   resources :users do
-    resources :wikis, shallow: true
+    resources :wikis, shallow: true do
+      member do
+        post 'preview'
+      end
+    end
   end
 
   # The priority is based upon order of creation:

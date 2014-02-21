@@ -1,4 +1,5 @@
 class WikisController < ApplicationController
+
   def index
 	@user = User.find(params[:user_id])
     @wikis = @user.wikis
@@ -35,14 +36,26 @@ class WikisController < ApplicationController
   end
   
   def update
-	wiki = Wiki.find(params[:id])
-	
-	if wiki.update_attributes(params[:wiki])
-	  flash[:notice] = "Changes saved successfully"
-	  redirect_to wiki
-	else
-	  flash[:error] = "Changes not saved successfully. Please try again."
-	  render :edit
-	end
+  	wiki = Wiki.find(params[:id])
+  	
+  	if wiki.update_attributes(params[:wiki])
+  	  flash[:notice] = "Changes saved successfully"
+  	  redirect_to wiki
+  	else
+  	  flash[:error] = "Changes not saved successfully. Please try again."
+  	  render :edit
+  	end
   end
+
+  def preview
+    @preview_text = params[:preview_text]
+
+    renderer = Redcarpet::Render::HTML.new
+    extensions = {fenced_code_blocks: true}
+    redcarpet = Redcarpet::Markdown.new(renderer, extensions)
+    #@preview_text = "test"
+    render text: (redcarpet.render @preview_text).html_safe
+  end
+
+  
 end
