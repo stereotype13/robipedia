@@ -46,16 +46,15 @@ class WikisController < ApplicationController
   	  render :edit
   	end
   end
-
-  def preview
-    @preview_text = params[:preview_text]
-
-    renderer = Redcarpet::Render::HTML.new
-    extensions = {fenced_code_blocks: true}
-    redcarpet = Redcarpet::Markdown.new(renderer, extensions)
-    #@preview_text = "test"
-    render text: (redcarpet.render @preview_text).html_safe
+  
+  def destroy
+	wiki = Wiki.find(params[:id])
+	
+	if wiki.destroy
+		render :nothing => true
+	else
+		render text: "Couldn't delete"
+	end
   end
 
-  
 end

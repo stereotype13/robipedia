@@ -1,4 +1,7 @@
 Robipedia::Application.routes.draw do
+
+  post "wiki/preview"
+
   get "wikis/index"
 
   devise_for :users
@@ -6,11 +9,10 @@ Robipedia::Application.routes.draw do
   root to: "welcome#index"
 
   resources :users do
-    resources :wikis, shallow: true do
-      member do
-        post 'preview'
-      end
-    end
+	member do
+		get 'wiki_table_data'
+	end
+    resources :wikis, shallow: true 
   end
 
   # The priority is based upon order of creation:

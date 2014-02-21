@@ -3,13 +3,13 @@
 		<table id="wikis" class="display">
 		  <thead>
 			<tr>
-			  <td>ID</td><td>Title</td><td>Edit</td>
+			  <td>ID</td><td>Friendly_id</td><td>Title</td><td>Edit</td><td>Delete</td>
 			</tr>
 		  </thead>
 		  <tbody>
 			<% @wikis.each do |wiki| %>
 			<tr>
-			  <td><%= wiki.user.id %></td><td><%= link_to wiki.title, wiki %></td><td><%= link_to "Edit", edit_wiki_path(wiki) %></td>
+			  <td><%= wiki.user.id %></td><td class="friendly_id"><%= wiki.friendly_id %></td><td><%= link_to wiki.title, wiki %></td><td><%= link_to "Edit", edit_wiki_path(wiki) %></td><td><a class="delete-wiki" style="cursor:pointer">Delete</a></td>
 			</tr>
 			<% end %>
 		  </tbody>
@@ -17,12 +17,41 @@
 	</div>
 </div>
 
+<input type="button" value="Button 1" onClick='test()'/>
+
 <script type="text/javascript">
+	function test() {
+		alert("asdf");
+	}
+
 	$( document ).ready(function() {
-		$('#wikis').dataTable({
+		var dataTable = $('#wikis').dataTable({
 			"sPaginationType": "bootstrap",
 			"bJQueryUI": "true"
 		});
+		
+			
+		
+		$('.delete-wiki').click(function() {
+			
+			friendly_id = $(this).parent().siblings('.friendly_id')[0].innerHTML;
+			url = "/wikis/" + friendly_id;
+			alert(url);
+			$.ajax({
+				method: "DELETE",
+				url: url,
+				success: function() {
+					
+					//$(this).parents('td')[0]
+					row_index = $(this).parents('tr').index();
+					alert(row_index);
+					dataTable.fnDeleteRow( row_index );
+				}
+			});
+		});
+		
 	});
+	
+	
   
 </script>

@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<%= form_for [user, wiki] do |f| %>
+		  <div class="form-group">
+			  <%= f.label :title %>:
+			  <%= f.text_field :title, class: "form-control" %><br />
+
+			  <%= f.label :body %>:
+			  <%= f.text_area :body, class: "form-control", id: "preview-text" %><br />
+
+			  <%= f.submit "Save", class: "btn btn-default" %>
+			  <input type="button" class="btn btn-default" value="Preview" onclick="preview()"/>
+		  </div>
+		<% end %>
+	</div>
+</div>
+
+<div id="dialog-confirm" title="Preview" tabindex="-1" role="dialog" class="modal fade bs-example-modal-lg">
+  <div class="modal-dialog modal-lg">
+  	<div class="modal-content">
+	  <div class="modal-header" >
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h4 class="modal-title">Preview</h4>
+      </div>
+      <p>markdown goes here</p>
+	  <div class="modal-footer">
+		<button class="btn btn-primary" data-dismiss="modal">Close</button>
+	  </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+		function preview() {
+				$.post(
+						"/wiki/preview",
+						{preview_text: $( "#preview-text" )[0].value},
+						function ( data ) {
+							$( "#dialog-confirm p" )[0].innerHTML = data;
+							$( "#dialog-confirm" ).modal(); //bootstrap modal dialog
+						}
+					);
+	
+			};
+
+  
+</script>
