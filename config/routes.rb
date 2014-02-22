@@ -2,16 +2,11 @@ Robipedia::Application.routes.draw do
 
   post "wiki/preview"
 
-  get "wikis/index"
-
   devise_for :users
 
   root to: "welcome#index"
 
   resources :users do
-	member do
-		get 'wiki_table_data'
-	end
     resources :wikis, shallow: true 
   end
 
