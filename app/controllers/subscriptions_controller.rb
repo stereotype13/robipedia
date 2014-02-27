@@ -3,9 +3,6 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
-    puts "KKKKKKKK"
-    puts "KKKKKKKK"
-    puts params
     @subscription = Subscription.new(params[:subscription])
     @subscription.user = current_user
     @subscription.plan_id = "premium"
