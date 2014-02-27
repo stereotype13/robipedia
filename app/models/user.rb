@@ -10,4 +10,5 @@ class User < ActiveRecord::Base
 
   has_many :wikis
   has_many :collaborators #has many 'collaborations'
+  has_one :subscription
 end

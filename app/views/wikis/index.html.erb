@@ -70,12 +70,13 @@
 
 	//Gets called by the Delete button in the modal dialog.
 	function delete_wiki() {
-		$.ajax({
-			method: "DELETE",
-			url: url,
-			success: function() {
-				
-				dataTable.fnDeleteRow( row.index() );
+		dataTable.fnDeleteRow( row.index() );
+    
+    $.ajax({
+      method: "DELETE",
+      url: url,
+      success: function() {
+         alert("it's gone!");    
 			}
 		});
 	};

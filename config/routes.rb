@@ -1,5 +1,7 @@
 Robipedia::Application.routes.draw do
 
+  resources :subscriptions
+  
   post "wiki/preview"
 
   devise_for :users

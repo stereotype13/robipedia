@@ -6,6 +6,8 @@
   <%= stylesheet_link_tag    "vendor", :media => "all", :debug => false %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "vendor", :debug => false %>
+  <%= javascript_include_tag "https://js.stripe.com/v1/", "application" %>
+  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
   <%= csrf_meta_tags %>
 </head>
 <body style="padding-top: 60px;">
@@ -27,8 +29,8 @@
         <% if current_user %>
           <li>
             <%= link_to "My Wikis", user_wikis_path(current_user) %>
-		  </li> 
-		  <li>
+		      </li> 
+		    <li>
 			<%= link_to "New Wiki", new_user_wiki_path(current_user) %>
           </li> 
         <% end %>
@@ -37,6 +39,11 @@
     <div class="navbar-collapse collapse pull-right">
       <ul class="nav navbar-nav">
         <% if current_user %>
+          <% if !current_user.premium %>
+            <li>
+              <%= link_to "Premium", new_subscription_path %>
+            </li>
+          <% end %>
           <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
         <% else %>
           <li><%= link_to "Sign In", new_user_session_path %></li>
