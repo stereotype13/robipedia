@@ -6,9 +6,8 @@ subscription =
   setupForm: ->
     $('#new_subscription').submit ->
       $('input[type=submit]').attr('disabled', true)
-      if $('#card_number').length
-        subscription.processCard()
-        false
+      subscription.processCard()
+      false
   
   processCard: ->
     card =
