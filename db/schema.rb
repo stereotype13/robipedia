@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140225053511) do
+ActiveRecord::Schema.define(:version => 20140227050305) do
 
   create_table "collaborators", :force => true do |t|
     t.integer  "user_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20140225053511) do
     t.string   "stripe_card_token"
     t.string   "plan_id"
     t.string   "stripe_customer_token"
+    t.string   "email"
   end
 
   create_table "users", :force => true do |t|
